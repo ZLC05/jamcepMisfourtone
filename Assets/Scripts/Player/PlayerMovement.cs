@@ -23,7 +23,16 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody rb;
 
+    
 
+    bool touchingGrass;
+    [Header("Grass Touch Mechanics")]
+    //bigger number, burger radius
+    public float touchRadius;
+
+    public LayerMask grassLayer;
+
+    public GameObject grassCheck;
 
     void Start()
     {
@@ -60,15 +69,33 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    void GrassDetection()
+    {
+        touchingGrass = Physics.CheckSphere(grassCheck.transform.position, touchRadius, grassLayer);
+        if (touchingGrass)
+        {
+            Debug.Log("Died from Grass");
+        }
+    }
+
+
     // Update is called once per frame
     void Update()
     {
         inputs();
         speedControl();
+        GrassDetection();
+
     }
 
     private void FixedUpdate()
     {
         movePlayer();
+    }
+
+    public void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(grassCheck.transform.position, touchRadius);
     }
 }
