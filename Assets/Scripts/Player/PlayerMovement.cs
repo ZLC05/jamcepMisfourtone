@@ -76,7 +76,7 @@ public class PlayerMovement : MonoBehaviour
         touchingGrass = Physics.CheckSphere(grassCheck.transform.position, touchRadius, grassLayer);
         if (touchingGrass)
         {
-            Debug.Log("Died from Grass");
+            DIE();
         }
     }
 
