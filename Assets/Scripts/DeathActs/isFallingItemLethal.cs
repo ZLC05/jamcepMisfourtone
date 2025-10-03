@@ -44,7 +44,8 @@ public class isFallingItemLethal : MonoBehaviour
     {
         if (col.gameObject.tag == "Player" && lethal)
         {
-            Debug.Log("DIE");
+            PlayerMovement pm = col.gameObject.GetComponent<PlayerMovement>();
+            pm.DIE();
         }
 
         if (col.gameObject.tag == "Ground")

@@ -20,4 +20,13 @@ public class carMove : MonoBehaviour
     {
         transform.position = Vector3.MoveTowards(transform.position, endPoint.transform.position, speed * Time.deltaTime);
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Player")
+        {
+            PlayerMovement pm = collision.gameObject.GetComponent<PlayerMovement>();
+            pm.DIE();
+        }
+    }
 }

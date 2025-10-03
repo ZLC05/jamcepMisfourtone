@@ -10,6 +10,8 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Movement")]
 
+    public bool canMove;
+
     public float speed;
 
     public Transform orientation;
@@ -82,7 +84,10 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        inputs();
+        if (canMove)
+        {
+            inputs();
+        }
         speedControl();
         GrassDetection();
 
@@ -91,6 +96,11 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         movePlayer();
+    }
+
+    public void DIE()
+    {
+        Debug.Log("YOU DIED IDIOT");
     }
 
     public void OnDrawGizmos()
