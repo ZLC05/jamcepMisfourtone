@@ -14,8 +14,9 @@ public class spawnFallingItem : MonoBehaviour
 
     [Header("If the Item is Thrown Stats")]
     public bool throwItem;
+    public float throwForce;
 
-    bool triggered = false;
+    public bool triggered = false;
     public void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "Player" && !triggered)
@@ -28,7 +29,18 @@ public class spawnFallingItem : MonoBehaviour
 
     private void spawnItem()
     {
+        Debug.Log("Spawned Item");
         GameObject item = Instantiate(fallingItem, itemSpawn.transform.position, Quaternion.identity);
+
+        Rigidbody itemRb = item.GetComponent<Rigidbody>();
+
+        if (throwItem)
+        {
+            Debug.Log("added force");
+            itemRb.AddForce(transform.forward * throwForce, ForceMode.Impulse);
+        }
+        
+
 
         Destroy(item, 3f);
     }

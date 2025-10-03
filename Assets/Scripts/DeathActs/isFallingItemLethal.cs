@@ -13,6 +13,8 @@ public class isFallingItemLethal : MonoBehaviour
 
     bool lethal;
 
+    
+
     Rigidbody rb;
 
     void Start()
@@ -38,6 +40,8 @@ public class isFallingItemLethal : MonoBehaviour
     {
         Vector3 gravity = globalGravity * gravityScale * Vector3.up;
         rb.AddForce(gravity, ForceMode.Acceleration);
+
+        
     }
 
     private void OnTriggerEnter(Collider col)
