@@ -40,12 +40,18 @@ public class GrandmaNodeMovement : MonoBehaviour
         //runs as update to check if the player is inside of the grandmas radius, if ever set to true, start the grandma walk sequence
         isPlayerInRadius = Physics.CheckSphere(new Vector3(transform.position.x, transform.position.y - 1, transform.position.z), grandmaKillRadius, playerLayer);
 
+
+        //checks if grandma is activated, if so then it will start the program if the player enters her LOS
         if (grandaActivated)
         {
             if (isPlayerInRadius)
             {
+                //this is where you will put the code to start the chat sequence, be sure to add code to pause the player (which already has a bool) and pause grandma until she is done chatting
+                
                 grandmaSightRadius = grandmaKillRadius;
                 canGrandmaKill = true;
+
+                //Node system, will go from node to node and when grandma arrives at a node, it will go to next node and look towards next node
                 if (nodeIndex < nodes.Count)
                 {
                     Vector3 targetPos = nodes[nodeIndex].position;
@@ -54,6 +60,7 @@ public class GrandmaNodeMovement : MonoBehaviour
 
                     transform.rotation = Quaternion.LookRotation(lookDirection);
 
+                    //switches to next node
                     if (Vector3.Distance(transform.position, targetPos) < 0.1f)
                     {
                         nodeIndex++;
@@ -61,6 +68,7 @@ public class GrandmaNodeMovement : MonoBehaviour
                 }
                 else
                 {
+                    //when grandma arrives at her destination, she is deacvivated, this is where you can start the chat sequence
                     canGrandmaKill = false;
                     grandaActivated = false;
                 }
