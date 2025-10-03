@@ -148,6 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravityScale: 10
+  DeathID: 2
 --- !u!65 &-8447634183883683660
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -120,6 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravityScale: 3
+  DeathID: 3
 --- !u!54 &4064230899862253253
 Rigidbody:
   m_ObjectHideFlags: 0

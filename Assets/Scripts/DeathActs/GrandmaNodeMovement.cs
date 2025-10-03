@@ -79,7 +79,7 @@ public class GrandmaNodeMovement : MonoBehaviour
             if (!isPlayerInRadius && canGrandmaKill)
             {
                 PlayerMovement pm = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
-                pm.DIE();
+                pm.DIE(6);
             }
         }
 

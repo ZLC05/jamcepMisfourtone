@@ -26,7 +26,7 @@ public class carMove : MonoBehaviour
         if(collision.gameObject.tag == "Player")
         {
             PlayerMovement pm = collision.gameObject.GetComponent<PlayerMovement>();
-            pm.DIE();
+            pm.DIE(8);
         }
     }
 }

@@ -13,7 +13,10 @@ public class isFallingItemLethal : MonoBehaviour
 
     bool lethal;
 
-    
+    //    ID 1: Piano
+    //    ID 2: Boulder
+    //    ID 3: Trash
+    public int DeathID;
 
     Rigidbody rb;
 
@@ -49,7 +52,7 @@ public class isFallingItemLethal : MonoBehaviour
         if (col.gameObject.tag == "Player" && lethal)
         {
             PlayerMovement pm = col.gameObject.GetComponent<PlayerMovement>();
-            pm.DIE();
+            pm.DIE(DeathID);
         }
 
         if (col.gameObject.tag == "Ground")
