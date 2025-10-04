@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class shootOutTrigger : MonoBehaviour
+public class winTrigger : MonoBehaviour
 {
-    public GameObject connectedDeath;
-    public bool isactive;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,12 +18,9 @@ public class shootOutTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (isactive)
+        if(other.gameObject.tag == "Player")
         {
-            connectedDeath.SetActive(true);
-            shootOutDeath sod = connectedDeath.GetComponent<shootOutDeath>();
-            sod.startedblastin();
+            Debug.Log("you win");
         }
-
     }
 }
