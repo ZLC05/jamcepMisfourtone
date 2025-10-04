@@ -7,9 +7,10 @@ public class carMove : MonoBehaviour
 {
     // Start is called before the first frame update
 
-
+    public List<Transform> nodes;
     public float speed;
-    public GameObject endPoint;
+    public float rotationSpeed;
+    public int currentNode;
     void Start()
     {
         
@@ -18,14 +19,33 @@ public class carMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, endPoint.transform.position, speed * Time.deltaTime);
+        if (currentNode < nodes.Count)
+        {
+            Vector3 targetPos = nodes[currentNode].position;
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
+            Vector3 lookDirection = Vector3.RotateTowards(transform.forward, targetPos - transform.position, rotationSpeed * Time.deltaTime, 0);
+
+            transform.rotation = Quaternion.LookRotation(lookDirection);
+
+            //switches to next node
+            if (Vector3.Distance(transform.position, targetPos) < 0.1f)
+            {
+                currentNode++;
+            }
+        }
+        else if(currentNode >= nodes.Count && currentNode > 0)
+        {
+            
+            Destroy(this.gameObject);
+        }
     }
 
-    private void OnCollisionEnter(Collision collision)
+
+    private void OnTriggerEnter(Collider col)
     {
-        if(collision.gameObject.tag == "Player")
+        if (col.gameObject.tag == "Player")
         {
-            PlayerMovement pm = collision.gameObject.GetComponent<PlayerMovement>();
+            PlayerMovement pm = col.gameObject.GetComponent<PlayerMovement>();
             pm.DIE(8);
         }
     }

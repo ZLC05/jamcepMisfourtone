@@ -8,8 +8,11 @@ public class spawnSuddenCar : MonoBehaviour
 
     public GameObject[] cars;
 
-    public GameObject spawnTransform;
-    public GameObject endpoint;
+    public List<Transform> nodes;
+
+    public bool spanedCar;
+
+    public float spawnDelay;
 
     void Start()
     {
@@ -28,19 +31,28 @@ public class spawnSuddenCar : MonoBehaviour
         if(other.gameObject.tag == "Player")
         {
             Debug.Log("Spawning Car");
-            spawnCar();
+            //audio file here
+            Invoke("spawnCar", spawnDelay);
         }
     }
 
 
    void spawnCar()
     {
-        int carID = Random.Range(0, cars.Length);
-        Debug.Log("Spawned Car = " + carID);
-        GameObject car = Instantiate(cars[carID], spawnTransform.transform.position, Quaternion.identity);
+        if (!spanedCar)
+        {
+            int carID = Random.Range(0, cars.Length);
+            Debug.Log("Spawned Car = " + carID);
+            GameObject car = Instantiate(cars[carID], nodes[0].transform.position, Quaternion.identity);
 
-        car.GetComponent<carMove>().endPoint = endpoint;
+            car.GetComponent<carMove>().nodes = nodes;
 
-        Destroy(car, 3f);
+
+            spanedCar = true;
+
+            
+
+        }
+
     }
 }
