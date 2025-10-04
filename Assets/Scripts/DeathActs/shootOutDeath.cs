@@ -18,6 +18,11 @@ public class shootOutDeath : MonoBehaviour
     public GameObject bulletSpawn;
     public float bulletForce;
 
+    [Header("Audio")]
+
+    [SerializeField] AudioSource audSource;
+    [SerializeField] AudioClip[] bulletSounds;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -59,7 +64,9 @@ public class shootOutDeath : MonoBehaviour
         {
             //spawn bullets here
 
-            GameObject bul = Instantiate(bullet, bulletSpawn.transform.position, bulletSpawn.transform.rotation);
+            Vector3 spawnTransform = new Vector3(bulletSpawn.transform.position.x, bulletSpawn.transform.position.y + Random.Range(-2, 2f), bulletSpawn.transform.position.z + Random.Range(-2f, 2f));
+
+            GameObject bul = Instantiate(bullet, spawnTransform, bulletSpawn.transform.rotation);
             Destroy(bul, 7f);
             Rigidbody rb = bul.GetComponent<Rigidbody>();
 
@@ -71,6 +78,8 @@ public class shootOutDeath : MonoBehaviour
             {
                 rb.AddForce(bul.transform.right * -bulletForce, ForceMode.Impulse);
             }
+
+            audSource.PlayOneShot(bulletSounds[Random.Range(0, bulletSounds.Length)]);
 
             yield return new WaitForSeconds(0.15f);
             
