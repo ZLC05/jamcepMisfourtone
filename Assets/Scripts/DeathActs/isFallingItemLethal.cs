@@ -13,6 +13,8 @@ public class isFallingItemLethal : MonoBehaviour
 
     bool lethal;
 
+    public bool isPiano;
+
     //    ID 1: Piano
     //    ID 2: Boulder
     //    ID 3: Trash
@@ -58,7 +60,12 @@ public class isFallingItemLethal : MonoBehaviour
         if (col.gameObject.tag == "Ground")
         {
             lethal = false;
-            Debug.Log("Turned off Lethality");
+            if (isPiano)
+            {
+                AudioSource ad = GetComponent<AudioSource>();
+                ad.Play();
+                Debug.Log("THIS IS A PIANO");
+            }
         }
     }
 }

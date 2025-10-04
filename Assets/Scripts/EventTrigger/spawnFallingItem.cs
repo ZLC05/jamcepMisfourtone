@@ -17,6 +17,8 @@ public class spawnFallingItem : MonoBehaviour
     public float throwForce;
 
     public bool triggered = false;
+
+    public float itemDeathTime;
     public void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "Player" && !triggered)
@@ -42,6 +44,6 @@ public class spawnFallingItem : MonoBehaviour
         
 
 
-        Destroy(item, 3f);
+        Destroy(item, itemDeathTime);
     }
 }
