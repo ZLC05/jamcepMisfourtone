@@ -121,9 +121,10 @@ public class PlayerMovement : MonoBehaviour
         if (canMove)
         {
             inputs();
+            speedControl();
+            GrassDetection();
         }
-        speedControl();
-        GrassDetection();
+        
 
         if (Input.GetKeyDown(KeyCode.F12))
         {
@@ -145,6 +146,8 @@ public class PlayerMovement : MonoBehaviour
         timerUI.SetActive(false);
         ttd.pauseTime = true;
         deathMessegeBox.text = deathMessege[ID];
+
+        canMove = false; //No more movement
 
         //add the sound death here, recall to line 40 for the IDS
         
