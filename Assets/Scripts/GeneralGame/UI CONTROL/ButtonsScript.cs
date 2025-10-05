@@ -6,7 +6,10 @@ using UnityEngine.SceneManagement;
 public class ButtonsScript : MonoBehaviour
 {
 
-    public int InGameScene, MainMenuScene, CreditsScene, WinScene;
+    //For starting the game
+    [SerializeField] GameObject panelToRemove; //Remove this panel once the game is started to avoid overlap
+    [SerializeField] Dialolgue_SO intro_Dialogue; //The intro dialogue to the game
+    [SerializeField] GameObject barrierToLeave; //Barrier to leave the restaurant to start the game
 
     public void QuitGame()
     {
@@ -15,24 +18,33 @@ public class ButtonsScript : MonoBehaviour
     }
 
 
-    public void GoToMainGame()
+    public void StartGame()
     {
-        Debug.Log("Dont got scene managing here yet so WAIIIIT");
+        Destroy(panelToRemove); //Removes this panel
+
+        //Reads the intro dialogue
+        FindFirstObjectByType<Dialogue_Manager>().startDialogue(intro_Dialogue, 0);
+
+        //Talks to the player to starts
+        FindFirstObjectByType<PlayerMovement>().startGame();
+
+        Destroy(barrierToLeave, 10); //Destroy after 6 seconds
     }
 
 
-    public void GoToMainMenu()
+    public void ResetMainScene()
     {
-        Debug.Log("Dont got scene managing here yet so WAIIIIT");
+        SceneManager.LoadScene("Main_Game");
     }
 
     public void GoToCredit()
     {
-        Debug.Log("Dont got scene managing here yet so WAIIIIT");
+        SceneManager.LoadScene("Credits_Scene");
     }
 
     public void GoToWin()
     {
         Debug.Log("Dont got scene managing here yet so WAIIIIT");
+        SceneManager.LoadScene("Win_Scene");
     }
 }

@@ -68,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
-        ttd.pauseTime = false;
+
         rb.drag = drag;
 
     }
@@ -112,6 +112,14 @@ public class PlayerMovement : MonoBehaviour
         {
             DIE(0);
         }
+    }
+
+    //Public function for starting the game
+    public void startGame()
+    {
+        canMove = true;
+
+        FindFirstObjectByType<PlayerCam>().startGame(); //Unlocks the camera
     }
 
 

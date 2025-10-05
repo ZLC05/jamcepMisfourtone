@@ -14,6 +14,7 @@ public class isFallingItemLethal : MonoBehaviour
     [SerializeField] bool lethal;
 
     public bool isPiano;
+    private bool audioPlayed; //To prevent it from playing multiple times
 
     //    ID 1: Piano
     //    ID 2: Boulder
@@ -57,6 +58,16 @@ public class isFallingItemLethal : MonoBehaviour
         {
             PlayerMovement pm = col.gameObject.GetComponent<PlayerMovement>();
             pm.DIE(DeathID);
+
+            if (isPiano)
+            {
+                if (audioPlayed) return; //Avoiding multiple instances of the same sound
+
+                AudioSource ad = GetComponent<AudioSource>();
+                ad.Play();
+                audioPlayed = true;
+                Debug.Log("THIS IS A PIANO");
+            }
         }
 
         if (col.gameObject.tag == "Ground" && !isboulder)
@@ -64,8 +75,11 @@ public class isFallingItemLethal : MonoBehaviour
             lethal = false;
             if (isPiano)
             {
+                if (audioPlayed) return; //Avoiding multiple instances of the same sound
+
                 AudioSource ad = GetComponent<AudioSource>();
                 ad.Play();
+                audioPlayed = true;
                 Debug.Log("THIS IS A PIANO");
             }
         }
