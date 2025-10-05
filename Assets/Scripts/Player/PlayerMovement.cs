@@ -150,7 +150,9 @@ public class PlayerMovement : MonoBehaviour
         canMove = false; //No more movement
 
         //add the sound death here, recall to line 40 for the IDS
-        
+
+        //Unlocks the cursor
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
     public void OnDrawGizmos()

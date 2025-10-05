@@ -52,7 +52,7 @@ public class spawnFallingItem : MonoBehaviour
         if (throwItem)
         {
             Debug.Log("added force");
-            itemRb.AddForce(transform.forward * throwForce, ForceMode.Impulse);
+            itemRb.AddForce(itemSpawn.transform.forward * throwForce, ForceMode.Impulse);
         }
         
 

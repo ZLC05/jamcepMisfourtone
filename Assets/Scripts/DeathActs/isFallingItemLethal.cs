@@ -11,7 +11,7 @@ public class isFallingItemLethal : MonoBehaviour
 
     public static float globalGravity = -9.81f;
 
-    bool lethal;
+    [SerializeField] bool lethal;
 
     public bool isPiano;
 
@@ -66,6 +66,20 @@ public class isFallingItemLethal : MonoBehaviour
                 ad.Play();
                 Debug.Log("THIS IS A PIANO");
             }
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player" && lethal)
+        {
+            PlayerMovement pm = collision.gameObject.GetComponent<PlayerMovement>();
+            pm.DIE(DeathID);
+        }
+
+        if (collision.gameObject.tag == "Ground")
+        {
+            if (lethal) lethal = false; //Disables the lethality
         }
     }
 }
