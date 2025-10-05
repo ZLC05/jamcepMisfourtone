@@ -15,7 +15,7 @@ public class shootOutDeath : MonoBehaviour
     [SerializeField] bool swapped;
 
     public GameObject bullet;
-    public GameObject bulletSpawn;
+    public GameObject bulletSpawn, boulderspawn;
     public float bulletForce;
 
     [Header("Audio")]
@@ -63,21 +63,42 @@ public class shootOutDeath : MonoBehaviour
         for(int i = 0; i < amountOfBullets; i++)
         {
             //spawn bullets here
-
+            int rand = Random.Range(0, 100);
             Vector3 spawnTransform = new Vector3(bulletSpawn.transform.position.x, bulletSpawn.transform.position.y + Random.Range(-2, 2f), bulletSpawn.transform.position.z + Random.Range(-2f, 2f));
 
-            GameObject bul = Instantiate(bullet, spawnTransform, bulletSpawn.transform.rotation);
-            Destroy(bul, 7f);
-            Rigidbody rb = bul.GetComponent<Rigidbody>();
 
-            if (!swapped)
+            if(rand == 23)
             {
-                rb.AddForce(bul.transform.right * bulletForce, ForceMode.Impulse);
+                GameObject bul = Instantiate(boulderspawn, spawnTransform, bulletSpawn.transform.rotation);
+                Destroy(bul, 7f);
+                Rigidbody rb = bul.GetComponent<Rigidbody>();
+
+                if (!swapped)
+                {
+                    rb.AddForce(bul.transform.right * bulletForce, ForceMode.Impulse);
+                }
+                else
+                {
+                    rb.AddForce(bul.transform.right * -bulletForce, ForceMode.Impulse);
+                }
             }
             else
             {
-                rb.AddForce(bul.transform.right * -bulletForce, ForceMode.Impulse);
+                GameObject bul = Instantiate(bullet, spawnTransform, bulletSpawn.transform.rotation);
+                Destroy(bul, 7f);
+                Rigidbody rb = bul.GetComponent<Rigidbody>();
+
+                if (!swapped)
+                {
+                    rb.AddForce(bul.transform.right * bulletForce, ForceMode.Impulse);
+                }
+                else
+                {
+                    rb.AddForce(bul.transform.right * -bulletForce, ForceMode.Impulse);
+                }
             }
+
+
 
             audSource.PlayOneShot(bulletSounds[Random.Range(0, bulletSounds.Length)]);
 
