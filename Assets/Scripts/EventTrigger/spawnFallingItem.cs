@@ -18,12 +18,25 @@ public class spawnFallingItem : MonoBehaviour
 
     public bool triggered = false;
 
+    public bool isPiano;
+    public GameObject piano;
+
+
     public float itemDeathTime;
     public void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "Player" && !triggered)
         {
-            spawnItem();
+            if (isPiano)
+            {
+                isFallingItemLethal lethal = piano.GetComponent<isFallingItemLethal>();
+                lethal.enabled = true;
+            }
+            else
+            {
+                spawnItem();
+                
+            }
             triggered = true;
         }
     }
