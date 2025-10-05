@@ -20,7 +20,7 @@ public class shootOutTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (isactive)
+        if (isactive && other.gameObject.tag == "Player")
         {
             connectedDeath.SetActive(true);
             shootOutDeath sod = connectedDeath.GetComponent<shootOutDeath>();

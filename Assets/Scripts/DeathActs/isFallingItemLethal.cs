@@ -20,6 +20,8 @@ public class isFallingItemLethal : MonoBehaviour
     //    ID 3: Trash
     public int DeathID;
 
+    public bool isboulder;
+
     Rigidbody rb;
 
     void Start()
@@ -57,7 +59,7 @@ public class isFallingItemLethal : MonoBehaviour
             pm.DIE(DeathID);
         }
 
-        if (col.gameObject.tag == "Ground")
+        if (col.gameObject.tag == "Ground" && !isboulder)
         {
             lethal = false;
             if (isPiano)

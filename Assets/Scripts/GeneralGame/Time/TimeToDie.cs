@@ -12,6 +12,8 @@ public class TimeToDie : MonoBehaviour
 
     public TextMeshProUGUI timeText;
 
+    public BoulderRain br;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +38,9 @@ public class TimeToDie : MonoBehaviour
             if (secondsTime < 0)
             {
                 PlayerMovement pm = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
-                pm.DIE(7);
+                br.startSpawningBoulders();
+                pauseTime = true;
+                timeText.text = "BOULDER RAIN";
             }
         }
     }
