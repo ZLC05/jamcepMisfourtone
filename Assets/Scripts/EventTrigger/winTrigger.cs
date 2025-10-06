@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class winTrigger : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class winTrigger : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            Debug.Log("you win");
+            SceneManager.LoadScene("Win_Scene");
         }
     }
 }

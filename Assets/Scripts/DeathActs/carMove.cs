@@ -11,9 +11,15 @@ public class carMove : MonoBehaviour
     public float speed;
     public float rotationSpeed;
     public int currentNode;
+
+    [Header("Audio")]
+
+    [SerializeField] AudioSource audSource; //Audio source of the car
+    [SerializeField] AudioClip[] audClips; //Audio clip array of beep beeps
+
     void Start()
     {
-        
+        if(audSource != null) audSource.PlayOneShot(audClips[Random.Range(0, audClips.Length)]); //Players a random audio clip
     }
 
     // Update is called once per frame

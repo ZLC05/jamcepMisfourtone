@@ -55,6 +55,8 @@ public class PlayerMovement : MonoBehaviour
     ID 9: Sewer - They are called manholes for a reason.
     */
     public string[] deathMessege;
+
+    [SerializeField] Dialolgue_SO[] deathMessages_SO; //Array of death message sciptable objects
     //add audio array for matching death message
 
     public GameObject deathcanvasUI;
@@ -150,10 +152,20 @@ public class PlayerMovement : MonoBehaviour
     {
         Debug.Log("YOU DIED IDIOT");
 
+        //Calls to stop all other dialogue
+
+        var dialogues = FindObjectsByType<Dialogue_Object>(FindObjectsSortMode.None);
+
+        foreach (Dialogue_Object dO in dialogues)
+        {
+            dO.cancelDialogue();
+        }
+
         deathcanvasUI.SetActive(true);
         timerUI.SetActive(false);
         ttd.pauseTime = true;
-        deathMessegeBox.text = deathMessege[ID];
+        //deathMessegeBox.text = deathMessege[ID];
+        FindFirstObjectByType<Dialogue_Manager>().startDialogue(deathMessages_SO[ID], 0);
 
         canMove = false; //No more movement
 
@@ -161,6 +173,7 @@ public class PlayerMovement : MonoBehaviour
 
         //Unlocks the cursor
         Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true; //Make sure it is visible
     }
 
     public void OnDrawGizmos()

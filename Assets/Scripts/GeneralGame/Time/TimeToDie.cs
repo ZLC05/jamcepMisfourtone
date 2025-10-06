@@ -14,6 +14,8 @@ public class TimeToDie : MonoBehaviour
 
     public BoulderRain br;
 
+    [SerializeField] Dialolgue_SO timeUp_SO; //Scriptable object to show when time is up
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,6 +58,8 @@ public class TimeToDie : MonoBehaviour
                 br.startSpawningBoulders();
                 pauseTime = true;
                 timeText.text = "BOULDER RAIN";
+
+                FindAnyObjectByType<Dialogue_Manager>().startDialogue(timeUp_SO, 0); //Starts reading the time up dialogue
             }
         }
     }

@@ -50,11 +50,36 @@ public class Dialogue_Object : MonoBehaviour
                 dialogue_Manager.startDialogue(dialogue_SO, index + 1);
             }
 
-            yield return new WaitForSeconds(1f); //1 Second delay before deletion
+            yield return new WaitForSeconds(1f); //1 Second delay before fadeout
 
+            StartCoroutine(fadeOut());
+        }
+    }
+
+    //Fadeout
+    IEnumerator fadeOut()
+    {
+        displayText.color = new Color(1, 1, 1, displayText.color.a - 0.1f);
+
+        yield return new WaitForSeconds(0.05f);
+
+        if (displayText.color.a <= 0)
+        {
             dialogue_Manager.deleteFromList(this.gameObject);
 
             Destroy(this.gameObject);
         }
+        else
+        {
+            StartCoroutine (fadeOut());
+        }
+    }
+
+    //Public function to call to for stopping the coroutine
+    public void cancelDialogue()
+    {
+        StopCoroutine(typeWriter());
+
+        StartCoroutine(fadeOut());
     }
 }
