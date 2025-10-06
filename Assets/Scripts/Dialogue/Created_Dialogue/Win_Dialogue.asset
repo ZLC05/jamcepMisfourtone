@@ -12,5 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 391751b915013dc428b7678f375f645d, type: 3}
   m_Name: Win_Dialogue
   m_EditorClassIdentifier: 
-  lines: []
-  timeBetweenLines: []
+  lines:
+  - Congradulations, you made it back to the building
+  - And on time
+  - Always make sure to watch the time, y'know?
+  - Anyways, hope you enjoyed this unfair...
+  - whatever this may be called
+  - And good job not dying to boulders...
+  - unless you did before, then..
+  - yeah, this has no memory persistence...
+  - So hopefully you didn't~
+  timeBetweenLines:
+  - 2
+  - 1
+  - 2
+  - 2
+  - 1
+  - 2
+  - 2
+  - 2
+  - 2
+  styleIndex: 0

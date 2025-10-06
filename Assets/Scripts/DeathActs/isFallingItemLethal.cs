@@ -56,6 +56,8 @@ public class isFallingItemLethal : MonoBehaviour
     {
         if (col.gameObject.tag == "Player" && lethal)
         {
+            lethal = false; //To avoid dupes
+
             PlayerMovement pm = col.gameObject.GetComponent<PlayerMovement>();
             pm.DIE(DeathID);
 
@@ -89,6 +91,8 @@ public class isFallingItemLethal : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player" && lethal)
         {
+            lethal = false; //To avoid dupes
+
             PlayerMovement pm = collision.gameObject.GetComponent<PlayerMovement>();
             pm.DIE(DeathID);
         }

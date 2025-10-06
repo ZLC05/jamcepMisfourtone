@@ -57,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
     public string[] deathMessege;
 
     [SerializeField] Dialolgue_SO[] deathMessages_SO; //Array of death message sciptable objects
-    //add audio array for matching death message
+    [SerializeField] AudioClip[] deathAudios; //Array for death audio sounds
 
     public GameObject deathcanvasUI;
     public GameObject timerUI;
@@ -150,7 +150,12 @@ public class PlayerMovement : MonoBehaviour
 
     public void DIE(int ID)
     {
+        if (!canMove) return; //Avoid dupe dialogue
+
         Debug.Log("YOU DIED IDIOT");
+        //Calls to stop gradma specifically [and the ttk to mute music]
+        FindFirstObjectByType<GrandmaNodeMovement>().canGrandmaKill = false;
+        FindFirstObjectByType<TimeToDie>().musicFadeOut();
 
         //Calls to stop all other dialogue
 
@@ -164,12 +169,13 @@ public class PlayerMovement : MonoBehaviour
         deathcanvasUI.SetActive(true);
         timerUI.SetActive(false);
         ttd.pauseTime = true;
-        //deathMessegeBox.text = deathMessege[ID];
+
+        //Plays the according audio and dialogue
+        if (deathAudios[ID] != null) GetComponent<AudioSource>().PlayOneShot(deathAudios[ID]);
         FindFirstObjectByType<Dialogue_Manager>().startDialogue(deathMessages_SO[ID], 0);
 
         canMove = false; //No more movement
-
-        //add the sound death here, recall to line 40 for the IDS
+        rb.constraints = RigidbodyConstraints.FreezeAll; //Freezes the player entirely
 
         //Unlocks the cursor
         Cursor.lockState = CursorLockMode.Confined;

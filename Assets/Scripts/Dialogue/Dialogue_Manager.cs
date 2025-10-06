@@ -13,8 +13,13 @@ public class Dialogue_Manager : MonoBehaviour
     //List of text fields to move them up and delete them
     [SerializeField] List<GameObject> textList = new List<GameObject>();
 
-    //Temp test
-    [SerializeField] Dialolgue_SO test;
+    [SerializeField] Dialolgue_SO display; //Text to display if not null
+
+    private void Start()
+    {
+        if (display != null) startDialogue(display, 0);
+    }
+
 
     //Public function to start a new multiline
     public void startDialogue(Dialolgue_SO read_SO, int index)

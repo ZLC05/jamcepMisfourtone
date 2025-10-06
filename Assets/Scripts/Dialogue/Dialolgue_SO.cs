@@ -8,4 +8,6 @@ public class Dialolgue_SO : ScriptableObject
     public string[] lines; //Lines of dialogue
 
     public float[] timeBetweenLines; //Amount of time between reading lines
+
+    public int styleIndex; //Index of style the text will display
 }

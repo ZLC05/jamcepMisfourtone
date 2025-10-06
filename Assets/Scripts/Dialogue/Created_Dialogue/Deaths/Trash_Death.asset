@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Trash_Death
   m_EditorClassIdentifier: 
   lines:
-  - geeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeet
-  - dunked on!
+  - '*geeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeet'
+  - '*dunked on!'
   timeBetweenLines:
   - 0
-  - 0
+  - 1
+  styleIndex: 1

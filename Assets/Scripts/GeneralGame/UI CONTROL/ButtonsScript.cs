@@ -5,11 +5,23 @@ using UnityEngine.SceneManagement;
 
 public class ButtonsScript : MonoBehaviour
 {
+    //If needing to unlock the mouse
+    [SerializeField] bool UnlockMouse;
 
     //For starting the game
     [SerializeField] GameObject panelToRemove; //Remove this panel once the game is started to avoid overlap
     [SerializeField] Dialolgue_SO intro_Dialogue; //The intro dialogue to the game
     [SerializeField] GameObject barrierToLeave; //Barrier to leave the restaurant to start the game
+
+
+    private void Start()
+    {
+        if (UnlockMouse)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+    }
 
     public void QuitGame()
     {

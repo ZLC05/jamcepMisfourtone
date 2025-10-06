@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 391751b915013dc428b7678f375f645d, type: 3}
   m_Name: Grandma_Start
   m_EditorClassIdentifier: 
-  lines: []
-  timeBetweenLines: []
+  lines:
+  - Stay close sonny
+  - Don't stray now, y'hear?
+  timeBetweenLines:
+  - 1
+  - 2

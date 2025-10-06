@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.TextCore.Text;
 
 public class Dialogue_Object : MonoBehaviour
 {
@@ -15,6 +16,13 @@ public class Dialogue_Object : MonoBehaviour
     //Values
     private int index; //Index of the current line
 
+    //Audio
+    [SerializeField] AudioClip[] audClips; //Audio clips for the dialogue sounds
+    [SerializeField] AudioSource audSource; //Audio source reference
+
+    //Special fonts
+    [SerializeField] TMP_FontAsset[] styleArray; //Array of all font styles
+
     //Public function for assigning values
     public void setup(Dialolgue_SO read_SO, Dialogue_Manager DM, int newIndex)
     {
@@ -26,6 +34,8 @@ public class Dialogue_Object : MonoBehaviour
         displayText.maxVisibleCharacters = 0;
         displayText.text = dialogue_SO.lines[index];
 
+        displayText.font = styleArray[dialogue_SO.styleIndex];
+
         StartCoroutine(typeWriter());
     }
 
@@ -33,6 +43,10 @@ public class Dialogue_Object : MonoBehaviour
     IEnumerator typeWriter()
     {
         displayText.maxVisibleCharacters++; //Adds one to max visible characters
+
+        //Plays a sound
+        audSource.pitch = Random.Range(0.99f, 1.02f);
+        audSource.PlayOneShot(audClips[Random.Range(0, audClips.Length)]);
 
         yield return new WaitForSeconds(0.025f); //Wait
 

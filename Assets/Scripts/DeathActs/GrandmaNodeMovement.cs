@@ -28,11 +28,10 @@ public class GrandmaNodeMovement : MonoBehaviour
 
     bool isPlayerInRadius;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [Header("Dialogue")]
+
+    [SerializeField] Dialolgue_SO start_SO; //Dialogue upon starting grandma
+    [SerializeField] Dialolgue_SO end_SO; //Dialogue upon ending grandma path
 
     // Update is called once per frame
     void Update()
@@ -47,7 +46,9 @@ public class GrandmaNodeMovement : MonoBehaviour
             if (isPlayerInRadius)
             {
                 //this is where you will put the code to start the chat sequence, be sure to add code to pause the player (which already has a bool) and pause grandma until she is done chatting
-                
+
+                if (!canGrandmaKill) FindFirstObjectByType<Dialogue_Manager>().startDialogue(start_SO, 0); //Starts the entry scriptable object
+
                 grandmaSightRadius = grandmaKillRadius;
                 canGrandmaKill = true;
 
@@ -71,6 +72,7 @@ public class GrandmaNodeMovement : MonoBehaviour
                     //when grandma arrives at her destination, she is deacvivated, this is where you can start the chat sequence
                     canGrandmaKill = false;
                     grandaActivated = false;
+                    FindFirstObjectByType<Dialogue_Manager>().startDialogue(end_SO, 0); //Runs the ending scriptable object
                 }
 
             }
